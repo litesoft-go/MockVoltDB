@@ -1,3 +1,3 @@
-module litesoft-go/MockVoltDB
+module github.com/litesoft-go/mockVoltdb
 
 go 1.14

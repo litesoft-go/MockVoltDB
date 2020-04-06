@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 
-	"github.com/litesoft-go/MockVoltDB/pkg/utils"
+	utils "github.com/litesoft-go/mockVoltdb/pkg/utils"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
