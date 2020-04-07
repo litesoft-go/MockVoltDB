@@ -12,6 +12,14 @@ import (
 	"sync"
 )
 
+const PORT_0_http___ = 8080
+const PORT_1_int____ = 3021
+const PORT_2_rep____ = 5555
+const PORT_3_zk_____ = 7181
+const PORT_4_jmx____ = 9090
+const PORT_5_admin__ = 21211
+const PORT_6_client_ = 21212
+
 func splitHost(pHost string) (rHost string, rPort string) {
 	rHost = pHost
 	if at := strings.IndexByte(pHost, ':'); at != -1 {
@@ -47,8 +55,14 @@ func main() {
 	}
 	if err == nil {
 		http.HandleFunc("/", handler)
-		err = doAllWork(8080, 8081)
-		// err = http.ListenAndServe(":8080", nil)
+		err = doAllWork(
+			PORT_0_http___,
+			PORT_1_int____,
+			PORT_2_rep____,
+			PORT_3_zk_____,
+			PORT_4_jmx____,
+			PORT_5_admin__,
+			PORT_6_client_)
 	}
 	log.Fatal(err)
 }
