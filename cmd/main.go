@@ -7,6 +7,7 @@ import (
 	"github.com/litesoft-go/mockvoltdb/version"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 )
@@ -23,22 +24,26 @@ func splitHost(pHost string) (rHost string, rPort string) {
 func handler(w http.ResponseWriter, r *http.Request) {
 	host, port := splitHost(r.Host)
 	url := r.URL
-	msg := fmt.Sprintf("Request: %s%s%s", host, port, url.Path)
+	msg := fmt.Sprintf("Request: %s%s%s%s", ourPrivateClassA, host, port, url.Path)
 	fmt.Println(msg)
 
 	_, _ = fmt.Fprint(w, msg)
 }
 
+var ourPrivateClassA = ""
+
 func main() {
 	fmt.Printf("MockVoltDB Version: %s\n", version.Version)
+	fmt.Printf("Args: %v\n", os.Args[1:])
 
 	ipv4s, err := utils.IPv4s()
 
 	fmt.Println("(IPv4s):")
 	for _, ipv4 := range ipv4s {
-		//if ip != nil {
 		fmt.Printf("   %s\n", ipv4.String())
-		//}
+		if ipv4.IsPrivateClassA() {
+			ourPrivateClassA = ipv4.String() + "|"
+		}
 	}
 	if err == nil {
 		http.HandleFunc("/", handler)
