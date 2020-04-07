@@ -22,4 +22,4 @@ EXPOSE 3021 5555 7181 8080 9090 21211 21212
 
 # create and populate ~/bin with appropriate executable.
 COPY ./instance/deployment/ ./
-COPY ../deployable/linux_amd64/MockVoltDB ./bin/MockVoltDB
+COPY ../deployable/linux_amd64/MockVoltDB ./bin/voltdb
