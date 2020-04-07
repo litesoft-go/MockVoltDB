@@ -11,7 +11,6 @@ import sys, os
 import shlex
 from time import strftime, gmtime, localtime, timezone
 import logging
-import re
 from traceback import format_exc
 
 

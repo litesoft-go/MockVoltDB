@@ -16,3 +16,4 @@
 /.idea/
 /deployable/linux_amd64/MockVoltDB
 /MockVoltDB
+/kubernetes/instance/deployment/bin/voltdb

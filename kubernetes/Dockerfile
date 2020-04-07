@@ -9,7 +9,7 @@ ENV PATH=$PATH:$HOME/bin
 RUN apt-get clean && \
     apt-get update && \
     apt-get -yq --no-install-recommends --no-install-suggests install \
-        openjdk-8-jre python dnsutils python-httplib2 curl jq \
+        python curl \
         locales && \
     apt-get autoremove -yq && \
     rm -rf /var/lib/apt/lists/* && \
@@ -22,4 +22,3 @@ EXPOSE 3021 5555 7181 8080 9090 21211 21212
 
 # create and populate ~/bin with appropriate executable.
 COPY ./instance/deployment/ ./
-COPY ../deployable/linux_amd64/MockVoltDB ./bin/voltdb
