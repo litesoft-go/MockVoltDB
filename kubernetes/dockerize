@@ -1,2 +1,2 @@
 cp ../deployable/linux_amd64/MockVoltDB ./instance/deployment/bin/voltdb
-docker build .
+docker build -t mock-voltdb .

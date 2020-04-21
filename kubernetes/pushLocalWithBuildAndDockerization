@@ -1,0 +1,8 @@
+pushd -n $(pwd)
+cd ..
+./linux_amd64_build
+popd
+./dockerize
+docker tag mock-voltdb:latest localhost:5000/litesoft/mock-voltdb:latest
+docker push localhost:5000/litesoft/mock-voltdb:latest
+docker image ls

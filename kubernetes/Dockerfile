@@ -1,19 +1,8 @@
-FROM ubuntu:18.04
+FROM alpine:latest
 
-# Assume creation of ~/bin
-ENV PATH=$PATH:$HOME/bin
+RUN apk --no-cache add ca-certificates
 
-# Configure required software packages.
-# dnsutils needed by voltdbk8s.py
-# python-httplib2, curl, and jq needed by k8sreadycheck.py.
-RUN apt-get clean && \
-    apt-get update && \
-    apt-get -yq --no-install-recommends --no-install-suggests install \
-        python curl \
-        locales && \
-    apt-get autoremove -yq && \
-    rm -rf /var/lib/apt/lists/* && \
-    locale-gen en_US.UTF-8
+WORKDIR /root/
 
 # VoltDB ports
 # See https://docs.voltdb.com/AdminGuide/adminserverports.php

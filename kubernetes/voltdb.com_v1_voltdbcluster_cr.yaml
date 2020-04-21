@@ -1,0 +1,14 @@
+apiVersion: voltdb.com/v1
+kind: VoltDBCluster
+metadata:
+  name: voltdb
+spec:
+  replicas: 3
+  persistentVolume:
+    size: "256Mi"
+  container:
+    image: "localhost:5000/litesoft/mock-voltdb:latest"
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: 1
