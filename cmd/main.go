@@ -19,6 +19,7 @@ const PORT_3_zk_____ = 7181
 const PORT_4_jmx____ = 9090
 const PORT_5_admin__ = 21211
 const PORT_6_client_ = 21212
+const PORT_7_status_ = 11780
 
 func splitHost(pHost string) (rHost string, rPort string) {
 	rHost = pHost
@@ -62,7 +63,9 @@ func main() {
 			PORT_3_zk_____,
 			PORT_4_jmx____,
 			PORT_5_admin__,
-			PORT_6_client_)
+			PORT_6_client_,
+			PORT_7_status_,
+		)
 	}
 	log.Fatal(err)
 }

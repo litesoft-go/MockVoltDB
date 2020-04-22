@@ -1,1 +1,1 @@
-./voltdb-k8s-utils.sh voltdb.cfg -M
+./makeConfigMaps.sh voltdb.cfg

@@ -5,9 +5,10 @@ import subprocess
 
 
 def do_cmd(cmd):
-    r = subprocess.check_output(cmd, shell=True).strip()
-    R = eval(r)
-    return R
+    # r = subprocess.check_output(cmd, shell=True).strip()
+    r = subprocess.call(cmd, shell=True)
+    # R = eval(r)
+    return r
 
 
 # subprocess.check_output was introduced in 2.7, let's be sure.
@@ -17,8 +18,10 @@ if sys.hexversion < 0x02070000:
 RC = 0
 
 r = do_cmd("curl -sg http://localhost:8080/api/2.0/DB-procedure...")
-if r[0] != 1:
-        print "Database is not ready or not processing transactions, '%s'" % r[1]
+# if r[0] != 1:
+if r != 0:
+        # print "Database is not ready or not processing transactions, '%s'" % r[1]
+        print "Database is not ready or not processing transactions"
         RC = 1
 
 sys.exit(RC)

@@ -3,12 +3,11 @@ kind: VoltDBCluster
 metadata:
   name: voltdb
 spec:
-  replicas: 3
+  replicas: 1
   persistentVolume:
     size: "256Mi"
   container:
-    image: "localhost:5000/litesoft/mock-voltdb:latest"
+    image: "localhost:5000/voltdb-m5"
     resources:
       requests:
-        memory: "64Mi"
-        cpu: 1
+        memory: "128Mi"
