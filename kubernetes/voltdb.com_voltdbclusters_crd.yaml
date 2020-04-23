@@ -29,11 +29,16 @@ spec:
         metadata:
           type: object
         spec:
-          description: The Spec section
+          description: VoltDBClusterSpec defines the desired state of VoltDBCluster
           properties:
             container:
               description: The desired state of the Container
               properties:
+                additionalArgs:
+                  description: 'Additional VoltDB start command args. More info: https://docs.voltdb.com/UsingVoltDB/clivoltdb.php'
+                  items:
+                    type: string
+                  type: array
                 image:
                   description: The docker image for the pods.
                   type: string
@@ -64,6 +69,10 @@ spec:
               - image
               - resources
               type: object
+            maintenanceMode:
+              description: 'VoltDB Cluster maintenance mode (pause all nodes) More
+                info: https://docs.voltdb.com/UsingVoltDB/sysprocpause.php'
+              type: boolean
             persistentVolume:
               description: The desired state of the PersistentVolume
               properties:
@@ -746,12 +755,22 @@ spec:
                   type: array
               type: object
             replicas:
-              description: The number of pods in a cluster, Non-negative, 1 assumed.
+              description: The number of pods in a cluster, non-negative, 1 assumed.
               format: int32
               type: integer
+            stoppedNodes:
+              description: 'User-specified list of K8s node IDs (0-n) to maintain
+                in a stopped state Not K8s, but Volt info: https://docs.voltdb.com/UsingVoltDB/sysprocstopnode.php'
+              items:
+                format: int32
+                type: integer
+              type: array
           required:
           - container
           - persistentVolume
+          type: object
+        status:
+          description: VoltDBClusterStatus defines the observed state of VoltDBCluster
           type: object
       type: object
   version: v1

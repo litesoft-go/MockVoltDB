@@ -4,6 +4,9 @@ metadata:
   name: voltdb
 spec:
   replicas: 1
+  maintenanceMode: false
+  stoppedNodes:
+  - -1
   persistentVolume:
     size: "256Mi"
   container:
