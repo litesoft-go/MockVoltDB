@@ -11,7 +11,7 @@ spec:
     size: "256Mi"
   container:
     image: "localhost:5000/voltdb-m5"
-    imagePullPolicy: "IfNotPresent"
+    imagePullPolicy: "Always"
     resources:
       requests:
         memory: "128Mi"
