@@ -3,23 +3,24 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/litesoft-go/mockvoltdb/pkg/utils"
-	"github.com/litesoft-go/mockvoltdb/version"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"sync"
+
+	"github.com/litesoft-go/mockvoltdb/pkg/utils"
+	"github.com/litesoft-go/mockvoltdb/version"
 )
 
-const PORT_0_http___ = 8080
-const PORT_1_int____ = 3021
-const PORT_2_rep____ = 5555
-const PORT_3_zk_____ = 7181
-const PORT_4_jmx____ = 9090
-const PORT_5_admin__ = 21211
-const PORT_6_client_ = 21212
-const PORT_7_status_ = 11780
+const PORT_0_http_____ = 8080
+const PORT_1_internal_ = 3021
+const PORT_2_rep______ = 5555
+const PORT_3_zk_______ = 7181
+const PORT_4_jmx______ = 9090
+const PORT_5_admin____ = 21211
+const PORT_6_client___ = 21212
+const PORT_7_status___ = 11780
 
 func splitHost(pHost string) (rHost string, rPort string) {
 	rHost = pHost
@@ -33,7 +34,12 @@ func splitHost(pHost string) (rHost string, rPort string) {
 func handler(w http.ResponseWriter, r *http.Request) {
 	host, port := splitHost(r.Host)
 	url := r.URL
-	msg := fmt.Sprintf("Request: %s%s%s%s", ourPrivateClassA, host, port, url.Path)
+	query := url.RawQuery
+	urlPathQuery := url.Path
+	if query != "" {
+		urlPathQuery += "?" + query
+	}
+	msg := fmt.Sprintf("Request: %s%s%s%s", ourPrivateClassA, host, port, urlPathQuery)
 	fmt.Println(msg)
 
 	_, _ = fmt.Fprint(w, msg)
@@ -57,14 +63,14 @@ func main() {
 	if err == nil {
 		http.HandleFunc("/", handler)
 		err = doAllWork(
-			PORT_0_http___,
-			PORT_1_int____,
-			PORT_2_rep____,
-			PORT_3_zk_____,
-			PORT_4_jmx____,
-			PORT_5_admin__,
-			PORT_6_client_,
-			PORT_7_status_,
+			PORT_0_http_____,
+			PORT_1_internal_,
+			PORT_2_rep______,
+			PORT_3_zk_______,
+			PORT_4_jmx______,
+			PORT_5_admin____,
+			PORT_6_client___,
+			PORT_7_status___,
 		)
 	}
 	log.Fatal(err)

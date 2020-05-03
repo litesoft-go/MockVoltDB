@@ -46,6 +46,232 @@ spec:
                   description: The docker image policy for if/when to pull a container
                     image
                   type: string
+                livenessProbe:
+                  description: 'Periodic probe of container liveness (only timings).
+                    Container will be restarted if the probe fails. Cannot be updated.
+                    More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes'
+                  properties:
+                    exec:
+                      description: One and only one of the following should be specified.
+                        Exec specifies the action to take.
+                      properties:
+                        command:
+                          description: Command is the command line to execute inside
+                            the container, the working directory for the command  is
+                            root ('/') in the container's filesystem. The command
+                            is simply exec'd, it is not run inside a shell, so traditional
+                            shell instructions ('|', etc) won't work. To use a shell,
+                            you need to explicitly call out to that shell. Exit status
+                            of 0 is treated as live/healthy and non-zero is unhealthy.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    failureThreshold:
+                      description: Minimum consecutive failures for the probe to be
+                        considered failed after having succeeded. Defaults to 3. Minimum
+                        value is 1.
+                      format: int32
+                      type: integer
+                    httpGet:
+                      description: HTTPGet specifies the http request to perform.
+                      properties:
+                        host:
+                          description: Host name to connect to, defaults to the pod
+                            IP. You probably want to set "Host" in httpHeaders instead.
+                          type: string
+                        httpHeaders:
+                          description: Custom headers to set in the request. HTTP
+                            allows repeated headers.
+                          items:
+                            description: HTTPHeader describes a custom header to be
+                              used in HTTP probes
+                            properties:
+                              name:
+                                description: The header field name
+                                type: string
+                              value:
+                                description: The header field value
+                                type: string
+                            required:
+                              - name
+                              - value
+                            type: object
+                          type: array
+                        path:
+                          description: Path to access on the HTTP server.
+                          type: string
+                        port:
+                          anyOf:
+                            - type: integer
+                            - type: string
+                          description: Name or number of the port to access on the
+                            container. Number must be in the range 1 to 65535. Name
+                            must be an IANA_SVC_NAME.
+                          x-kubernetes-int-or-string: true
+                        scheme:
+                          description: Scheme to use for connecting to the host. Defaults
+                            to HTTP.
+                          type: string
+                      required:
+                        - port
+                      type: object
+                    initialDelaySeconds:
+                      description: 'Number of seconds after the container has started
+                        before liveness probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes'
+                      format: int32
+                      type: integer
+                    periodSeconds:
+                      description: How often (in seconds) to perform the probe. Default
+                        to 10 seconds. Minimum value is 1.
+                      format: int32
+                      type: integer
+                    successThreshold:
+                      description: Minimum consecutive successes for the probe to
+                        be considered successful after having failed. Defaults to
+                        1. Must be 1 for liveness and startup. Minimum value is 1.
+                      format: int32
+                      type: integer
+                    tcpSocket:
+                      description: 'TCPSocket specifies an action involving a TCP
+                        port. TCP hooks not yet supported TODO: implement a realistic
+                        TCP lifecycle hook'
+                      properties:
+                        host:
+                          description: 'Optional: Host name to connect to, defaults
+                            to the pod IP.'
+                          type: string
+                        port:
+                          anyOf:
+                            - type: integer
+                            - type: string
+                          description: Number or name of the port to access on the
+                            container. Number must be in the range 1 to 65535. Name
+                            must be an IANA_SVC_NAME.
+                          x-kubernetes-int-or-string: true
+                      required:
+                        - port
+                      type: object
+                    timeoutSeconds:
+                      description: 'Number of seconds after which the probe times
+                        out. Defaults to 1 second. Minimum value is 1. More info:
+                        https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes'
+                      format: int32
+                      type: integer
+                  type: object
+                readinessProbe:
+                  description: 'Periodic probe of container service readiness (only
+                    timings). Container will be removed from service endpoints if
+                    the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes'
+                  properties:
+                    exec:
+                      description: One and only one of the following should be specified.
+                        Exec specifies the action to take.
+                      properties:
+                        command:
+                          description: Command is the command line to execute inside
+                            the container, the working directory for the command  is
+                            root ('/') in the container's filesystem. The command
+                            is simply exec'd, it is not run inside a shell, so traditional
+                            shell instructions ('|', etc) won't work. To use a shell,
+                            you need to explicitly call out to that shell. Exit status
+                            of 0 is treated as live/healthy and non-zero is unhealthy.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    failureThreshold:
+                      description: Minimum consecutive failures for the probe to be
+                        considered failed after having succeeded. Defaults to 3. Minimum
+                        value is 1.
+                      format: int32
+                      type: integer
+                    httpGet:
+                      description: HTTPGet specifies the http request to perform.
+                      properties:
+                        host:
+                          description: Host name to connect to, defaults to the pod
+                            IP. You probably want to set "Host" in httpHeaders instead.
+                          type: string
+                        httpHeaders:
+                          description: Custom headers to set in the request. HTTP
+                            allows repeated headers.
+                          items:
+                            description: HTTPHeader describes a custom header to be
+                              used in HTTP probes
+                            properties:
+                              name:
+                                description: The header field name
+                                type: string
+                              value:
+                                description: The header field value
+                                type: string
+                            required:
+                              - name
+                              - value
+                            type: object
+                          type: array
+                        path:
+                          description: Path to access on the HTTP server.
+                          type: string
+                        port:
+                          anyOf:
+                            - type: integer
+                            - type: string
+                          description: Name or number of the port to access on the
+                            container. Number must be in the range 1 to 65535. Name
+                            must be an IANA_SVC_NAME.
+                          x-kubernetes-int-or-string: true
+                        scheme:
+                          description: Scheme to use for connecting to the host. Defaults
+                            to HTTP.
+                          type: string
+                      required:
+                        - port
+                      type: object
+                    initialDelaySeconds:
+                      description: 'Number of seconds after the container has started
+                        before liveness probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes'
+                      format: int32
+                      type: integer
+                    periodSeconds:
+                      description: How often (in seconds) to perform the probe. Default
+                        to 10 seconds. Minimum value is 1.
+                      format: int32
+                      type: integer
+                    successThreshold:
+                      description: Minimum consecutive successes for the probe to
+                        be considered successful after having failed. Defaults to
+                        1. Must be 1 for liveness and startup. Minimum value is 1.
+                      format: int32
+                      type: integer
+                    tcpSocket:
+                      description: 'TCPSocket specifies an action involving a TCP
+                        port. TCP hooks not yet supported TODO: implement a realistic
+                        TCP lifecycle hook'
+                      properties:
+                        host:
+                          description: 'Optional: Host name to connect to, defaults
+                            to the pod IP.'
+                          type: string
+                        port:
+                          anyOf:
+                            - type: integer
+                            - type: string
+                          description: Number or name of the port to access on the
+                            container. Number must be in the range 1 to 65535. Name
+                            must be an IANA_SVC_NAME.
+                          x-kubernetes-int-or-string: true
+                      required:
+                        - port
+                      type: object
+                    timeoutSeconds:
+                      description: 'Number of seconds after which the probe times
+                        out. Defaults to 1 second. Minimum value is 1. More info:
+                        https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes'
+                      format: int32
+                      type: integer
+                  type: object
                 resources:
                   description: 'The resources required (at least Memory should be
                     supplied). More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
@@ -66,9 +292,15 @@ spec:
                       type: object
                   type: object
               required:
-              - image
-              - resources
+                - image
+                - resources
               type: object
+            disableLivenessChecks:
+              description: VoltDB Cluster Pods no Liveness checks mode
+              type: boolean
+            disableReadynessChecks:
+              description: VoltDB Cluster Pods no Readyness checks mode
+              type: boolean
             maintenanceMode:
               description: 'VoltDB Cluster maintenance mode (pause all nodes) More
                 info: https://docs.voltdb.com/UsingVoltDB/sysprocpause.php'
@@ -83,7 +315,7 @@ spec:
                   description: Persistent Volume Storage Class Name
                   type: string
               required:
-              - size
+                - size
               type: object
             pod:
               description: The desired state of the Pod
@@ -154,8 +386,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                      - key
-                                      - operator
+                                        - key
+                                        - operator
                                       type: object
                                     type: array
                                   matchFields:
@@ -190,8 +422,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                      - key
-                                      - operator
+                                        - key
+                                        - operator
                                       type: object
                                     type: array
                                 type: object
@@ -201,8 +433,8 @@ spec:
                                 format: int32
                                 type: integer
                             required:
-                            - preference
-                            - weight
+                              - preference
+                              - weight
                             type: object
                           type: array
                         requiredDuringSchedulingIgnoredDuringExecution:
@@ -255,8 +487,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                      - key
-                                      - operator
+                                        - key
+                                        - operator
                                       type: object
                                     type: array
                                   matchFields:
@@ -291,14 +523,14 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                      - key
-                                      - operator
+                                        - key
+                                        - operator
                                       type: object
                                     type: array
                                 type: object
                               type: array
                           required:
-                          - nodeSelectorTerms
+                            - nodeSelectorTerms
                           type: object
                       type: object
                     podAffinity:
@@ -362,8 +594,8 @@ spec:
                                                 type: string
                                               type: array
                                           required:
-                                          - key
-                                          - operator
+                                            - key
+                                            - operator
                                           type: object
                                         type: array
                                       matchLabels:
@@ -395,7 +627,7 @@ spec:
                                       is not allowed.
                                     type: string
                                 required:
-                                - topologyKey
+                                  - topologyKey
                                 type: object
                               weight:
                                 description: weight associated with matching the corresponding
@@ -403,8 +635,8 @@ spec:
                                 format: int32
                                 type: integer
                             required:
-                            - podAffinityTerm
-                            - weight
+                              - podAffinityTerm
+                              - weight
                             type: object
                           type: array
                         requiredDuringSchedulingIgnoredDuringExecution:
@@ -459,8 +691,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                      - key
-                                      - operator
+                                        - key
+                                        - operator
                                       type: object
                                     type: array
                                   matchLabels:
@@ -491,7 +723,7 @@ spec:
                                   is running. Empty topologyKey is not allowed.
                                 type: string
                             required:
-                            - topologyKey
+                              - topologyKey
                             type: object
                           type: array
                       type: object
@@ -558,8 +790,8 @@ spec:
                                                 type: string
                                               type: array
                                           required:
-                                          - key
-                                          - operator
+                                            - key
+                                            - operator
                                           type: object
                                         type: array
                                       matchLabels:
@@ -591,7 +823,7 @@ spec:
                                       is not allowed.
                                     type: string
                                 required:
-                                - topologyKey
+                                  - topologyKey
                                 type: object
                               weight:
                                 description: weight associated with matching the corresponding
@@ -599,8 +831,8 @@ spec:
                                 format: int32
                                 type: integer
                             required:
-                            - podAffinityTerm
-                            - weight
+                              - podAffinityTerm
+                              - weight
                             type: object
                           type: array
                         requiredDuringSchedulingIgnoredDuringExecution:
@@ -655,8 +887,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                      - key
-                                      - operator
+                                        - key
+                                        - operator
                                       type: object
                                     type: array
                                   matchLabels:
@@ -687,7 +919,7 @@ spec:
                                   is running. Empty topologyKey is not allowed.
                                 type: string
                             required:
-                            - topologyKey
+                              - topologyKey
                             type: object
                           type: array
                       type: object
@@ -697,6 +929,20 @@ spec:
                     type: string
                   description: a string/string map of key/value annotations (ObjectMeta)
                   type: object
+                imagePullSecrets:
+                  description: 'ImagePullSecrets is an optional list of references
+                    to secrets to use for pulling the images (PodSpec) More info:
+                    https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod'
+                  items:
+                    description: LocalObjectReference contains enough information
+                      to let you locate the referenced object inside the same namespace.
+                    properties:
+                      name:
+                        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                          TODO: Add other useful fields. apiVersion, kind, uid?'
+                        type: string
+                    type: object
+                  type: array
                 nodeSelector:
                   additionalProperties:
                     type: string
@@ -755,7 +1001,7 @@ spec:
                   type: array
               type: object
             replicas:
-              description: The number of pods in a cluster, non-negative, 1 assumed.
+              description: The number of pods in a cluster, 1 assumed.
               format: int32
               type: integer
             stoppedNodes:
@@ -766,15 +1012,125 @@ spec:
                 type: integer
               type: array
           required:
-          - container
-          - persistentVolume
+            - container
+            - persistentVolume
           type: object
         status:
-          description: VoltDBClusterStatus defines the observed state of VoltDBCluster
+          description: VoltDBClusterStatus defines the observed state of a VoltDBCluster
+          properties:
+            clusterState:
+              description: The ClusterState holds the state of the VoltDB Cluster
+              properties:
+                lastError:
+                  description: The last error from Cluster Workflow
+                  type: string
+                opaqueState:
+                  description: The OpaqueState holds data that the operator authors
+                    do not want anybody to manually change!
+                  type: string
+                state:
+                  description: The Cluster's current state (e.g. "Uninitialized",
+                    "Paused", "Nominal", ...)
+                  type: string
+                workflow:
+                  description: The current Workflow
+                  properties:
+                    name:
+                      description: The Workflow selector Name
+                      type: string
+                    step:
+                      description: The current Step in the Workflow
+                      properties:
+                        ID:
+                          description: The Step ID in the Workflow
+                          type: string
+                        failedMessages:
+                          description: The Step Failed Message in the Workflow
+                          items:
+                            type: string
+                          type: array
+                        opaqueState:
+                          description: The OpaqueState holds data that the operator
+                            authors do not want anybody to manually change!
+                          type: string
+                        timeStarted:
+                          description: The Time this step was Started (ISO8601, Z
+                            form to the Second)
+                          type: string
+                      required:
+                        - ID
+                        - timeStarted
+                      type: object
+                  required:
+                    - name
+                  type: object
+              required:
+                - state
+              type: object
+            podStates:
+              description: The PodStates holds the state of all of the VoltDB Cluster's
+                PODs
+              items:
+                description: PodState defines the current state of VoltDB Pod
+                properties:
+                  id:
+                    description: The Pod's ID (e.g. 0 to ...)
+                    format: int32
+                    type: integer
+                  lastError:
+                    description: The last error from this Pod's Workflow
+                    type: string
+                  opaqueState:
+                    description: The OpaqueState holds data that the operator authors
+                      do not want anybody to manually change!
+                    type: string
+                  state:
+                    description: The Pod's current state (e.g. "Uninitialized", "Stopped",
+                      "Nominal", ...)
+                    type: string
+                  workflow:
+                    description: The current Workflow
+                    properties:
+                      name:
+                        description: The Workflow selector Name
+                        type: string
+                      step:
+                        description: The current Step in the Workflow
+                        properties:
+                          ID:
+                            description: The Step ID in the Workflow
+                            type: string
+                          failedMessages:
+                            description: The Step Failed Message in the Workflow
+                            items:
+                              type: string
+                            type: array
+                          opaqueState:
+                            description: The OpaqueState holds data that the operator
+                              authors do not want anybody to manually change!
+                            type: string
+                          timeStarted:
+                            description: The Time this step was Started (ISO8601,
+                              Z form to the Second)
+                            type: string
+                        required:
+                          - ID
+                          - timeStarted
+                        type: object
+                    required:
+                      - name
+                    type: object
+                required:
+                  - id
+                  - state
+                type: object
+              type: array
+          required:
+            - clusterState
           type: object
       type: object
   version: v1
   versions:
-  - name: v1
-    served: true
-    storage: true
+    - name: v1
+      served: true
+      storage: true
