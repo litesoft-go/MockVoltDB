@@ -94,8 +94,8 @@ spec:
                                 description: The header field value
                                 type: string
                             required:
-                              - name
-                              - value
+                            - name
+                            - value
                             type: object
                           type: array
                         path:
@@ -103,8 +103,8 @@ spec:
                           type: string
                         port:
                           anyOf:
-                            - type: integer
-                            - type: string
+                          - type: integer
+                          - type: string
                           description: Name or number of the port to access on the
                             container. Number must be in the range 1 to 65535. Name
                             must be an IANA_SVC_NAME.
@@ -114,7 +114,7 @@ spec:
                             to HTTP.
                           type: string
                       required:
-                        - port
+                      - port
                       type: object
                     initialDelaySeconds:
                       description: 'Number of seconds after the container has started
@@ -143,14 +143,14 @@ spec:
                           type: string
                         port:
                           anyOf:
-                            - type: integer
-                            - type: string
+                          - type: integer
+                          - type: string
                           description: Number or name of the port to access on the
                             container. Number must be in the range 1 to 65535. Name
                             must be an IANA_SVC_NAME.
                           x-kubernetes-int-or-string: true
                       required:
-                        - port
+                      - port
                       type: object
                     timeoutSeconds:
                       description: 'Number of seconds after which the probe times
@@ -207,8 +207,8 @@ spec:
                                 description: The header field value
                                 type: string
                             required:
-                              - name
-                              - value
+                            - name
+                            - value
                             type: object
                           type: array
                         path:
@@ -216,8 +216,8 @@ spec:
                           type: string
                         port:
                           anyOf:
-                            - type: integer
-                            - type: string
+                          - type: integer
+                          - type: string
                           description: Name or number of the port to access on the
                             container. Number must be in the range 1 to 65535. Name
                             must be an IANA_SVC_NAME.
@@ -227,7 +227,7 @@ spec:
                             to HTTP.
                           type: string
                       required:
-                        - port
+                      - port
                       type: object
                     initialDelaySeconds:
                       description: 'Number of seconds after the container has started
@@ -256,14 +256,14 @@ spec:
                           type: string
                         port:
                           anyOf:
-                            - type: integer
-                            - type: string
+                          - type: integer
+                          - type: string
                           description: Number or name of the port to access on the
                             container. Number must be in the range 1 to 65535. Name
                             must be an IANA_SVC_NAME.
                           x-kubernetes-int-or-string: true
                       required:
-                        - port
+                      - port
                       type: object
                     timeoutSeconds:
                       description: 'Number of seconds after which the probe times
@@ -292,8 +292,8 @@ spec:
                       type: object
                   type: object
               required:
-                - image
-                - resources
+              - image
+              - resources
               type: object
             disableLivenessChecks:
               description: VoltDB Cluster Pods no Liveness checks mode
@@ -315,7 +315,7 @@ spec:
                   description: Persistent Volume Storage Class Name
                   type: string
               required:
-                - size
+              - size
               type: object
             pod:
               description: The desired state of the Pod
@@ -386,8 +386,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                        - key
-                                        - operator
+                                      - key
+                                      - operator
                                       type: object
                                     type: array
                                   matchFields:
@@ -422,8 +422,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                        - key
-                                        - operator
+                                      - key
+                                      - operator
                                       type: object
                                     type: array
                                 type: object
@@ -433,8 +433,8 @@ spec:
                                 format: int32
                                 type: integer
                             required:
-                              - preference
-                              - weight
+                            - preference
+                            - weight
                             type: object
                           type: array
                         requiredDuringSchedulingIgnoredDuringExecution:
@@ -487,8 +487,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                        - key
-                                        - operator
+                                      - key
+                                      - operator
                                       type: object
                                     type: array
                                   matchFields:
@@ -523,14 +523,14 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                        - key
-                                        - operator
+                                      - key
+                                      - operator
                                       type: object
                                     type: array
                                 type: object
                               type: array
                           required:
-                            - nodeSelectorTerms
+                          - nodeSelectorTerms
                           type: object
                       type: object
                     podAffinity:
@@ -594,8 +594,8 @@ spec:
                                                 type: string
                                               type: array
                                           required:
-                                            - key
-                                            - operator
+                                          - key
+                                          - operator
                                           type: object
                                         type: array
                                       matchLabels:
@@ -627,7 +627,7 @@ spec:
                                       is not allowed.
                                     type: string
                                 required:
-                                  - topologyKey
+                                - topologyKey
                                 type: object
                               weight:
                                 description: weight associated with matching the corresponding
@@ -635,8 +635,8 @@ spec:
                                 format: int32
                                 type: integer
                             required:
-                              - podAffinityTerm
-                              - weight
+                            - podAffinityTerm
+                            - weight
                             type: object
                           type: array
                         requiredDuringSchedulingIgnoredDuringExecution:
@@ -691,8 +691,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                        - key
-                                        - operator
+                                      - key
+                                      - operator
                                       type: object
                                     type: array
                                   matchLabels:
@@ -723,7 +723,7 @@ spec:
                                   is running. Empty topologyKey is not allowed.
                                 type: string
                             required:
-                              - topologyKey
+                            - topologyKey
                             type: object
                           type: array
                       type: object
@@ -790,8 +790,8 @@ spec:
                                                 type: string
                                               type: array
                                           required:
-                                            - key
-                                            - operator
+                                          - key
+                                          - operator
                                           type: object
                                         type: array
                                       matchLabels:
@@ -823,7 +823,7 @@ spec:
                                       is not allowed.
                                     type: string
                                 required:
-                                  - topologyKey
+                                - topologyKey
                                 type: object
                               weight:
                                 description: weight associated with matching the corresponding
@@ -831,8 +831,8 @@ spec:
                                 format: int32
                                 type: integer
                             required:
-                              - podAffinityTerm
-                              - weight
+                            - podAffinityTerm
+                            - weight
                             type: object
                           type: array
                         requiredDuringSchedulingIgnoredDuringExecution:
@@ -887,8 +887,8 @@ spec:
                                             type: string
                                           type: array
                                       required:
-                                        - key
-                                        - operator
+                                      - key
+                                      - operator
                                       type: object
                                     type: array
                                   matchLabels:
@@ -919,7 +919,7 @@ spec:
                                   is running. Empty topologyKey is not allowed.
                                 type: string
                             required:
-                              - topologyKey
+                            - topologyKey
                             type: object
                           type: array
                       type: object
@@ -1012,125 +1012,17 @@ spec:
                 type: integer
               type: array
           required:
-            - container
-            - persistentVolume
+          - container
+          - persistentVolume
           type: object
         status:
           description: VoltDBClusterStatus defines the observed state of a VoltDBCluster
-          properties:
-            clusterState:
-              description: The ClusterState holds the state of the VoltDB Cluster
-              properties:
-                lastError:
-                  description: The last error from Cluster Workflow
-                  type: string
-                opaqueState:
-                  description: The OpaqueState holds data that the operator authors
-                    do not want anybody to manually change!
-                  type: string
-                state:
-                  description: The Cluster's current state (e.g. "Uninitialized",
-                    "Paused", "Nominal", ...)
-                  type: string
-                workflow:
-                  description: The current Workflow
-                  properties:
-                    name:
-                      description: The Workflow selector Name
-                      type: string
-                    step:
-                      description: The current Step in the Workflow
-                      properties:
-                        ID:
-                          description: The Step ID in the Workflow
-                          type: string
-                        failedMessages:
-                          description: The Step Failed Message in the Workflow
-                          items:
-                            type: string
-                          type: array
-                        opaqueState:
-                          description: The OpaqueState holds data that the operator
-                            authors do not want anybody to manually change!
-                          type: string
-                        timeStarted:
-                          description: The Time this step was Started (ISO8601, Z
-                            form to the Second)
-                          type: string
-                      required:
-                        - ID
-                        - timeStarted
-                      type: object
-                  required:
-                    - name
-                  type: object
-              required:
-                - state
-              type: object
-            podStates:
-              description: The PodStates holds the state of all of the VoltDB Cluster's
-                PODs
-              items:
-                description: PodState defines the current state of VoltDB Pod
-                properties:
-                  id:
-                    description: The Pod's ID (e.g. 0 to ...)
-                    format: int32
-                    type: integer
-                  lastError:
-                    description: The last error from this Pod's Workflow
-                    type: string
-                  opaqueState:
-                    description: The OpaqueState holds data that the operator authors
-                      do not want anybody to manually change!
-                    type: string
-                  state:
-                    description: The Pod's current state (e.g. "Uninitialized", "Stopped",
-                      "Nominal", ...)
-                    type: string
-                  workflow:
-                    description: The current Workflow
-                    properties:
-                      name:
-                        description: The Workflow selector Name
-                        type: string
-                      step:
-                        description: The current Step in the Workflow
-                        properties:
-                          ID:
-                            description: The Step ID in the Workflow
-                            type: string
-                          failedMessages:
-                            description: The Step Failed Message in the Workflow
-                            items:
-                              type: string
-                            type: array
-                          opaqueState:
-                            description: The OpaqueState holds data that the operator
-                              authors do not want anybody to manually change!
-                            type: string
-                          timeStarted:
-                            description: The Time this step was Started (ISO8601,
-                              Z form to the Second)
-                            type: string
-                        required:
-                          - ID
-                          - timeStarted
-                        type: object
-                    required:
-                      - name
-                    type: object
-                required:
-                  - id
-                  - state
-                type: object
-              type: array
-          required:
-            - clusterState
           type: object
+      required:
+      - spec
       type: object
   version: v1
   versions:
-    - name: v1
-      served: true
-      storage: true
+  - name: v1
+    served: true
+    storage: true

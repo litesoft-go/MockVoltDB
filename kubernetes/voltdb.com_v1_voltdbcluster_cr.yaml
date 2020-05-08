@@ -3,7 +3,7 @@ kind: VoltDBCluster
 metadata:
   name: voltdb
 spec:
-  replicas: 1
+  replicas: 0
   maintenanceMode: false
   stoppedNodes:
   - -1

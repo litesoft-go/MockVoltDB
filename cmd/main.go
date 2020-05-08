@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/litesoft-go/mockvoltdb/pkg/canned"
 	"github.com/litesoft-go/mockvoltdb/pkg/utils"
 	"github.com/litesoft-go/mockvoltdb/version"
 )
@@ -21,6 +22,8 @@ const PORT_4_jmx______ = 9090
 const PORT_5_admin____ = 21211
 const PORT_6_client___ = 21212
 const PORT_7_status___ = 11780
+
+var responses = make(map[string]*utils.Responder)
 
 func splitHost(pHost string) (rHost string, rPort string) {
 	rHost = pHost
@@ -39,10 +42,23 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if query != "" {
 		urlPathQuery += "?" + query
 	}
+	resp := responses[port].GetResponse(urlPathQuery)
+	cType := "application/json"
+	body := resp.GetBody()
+	status := resp.GetStatus()
 	msg := fmt.Sprintf("Request: %s%s%s%s", ourPrivateClassA, host, port, urlPathQuery)
+	if status == 404 {
+		msg = "**** 404 - " + msg
+		body = "port[" + port + "] " + body
+		cType = "text/plain"
+	}
 	fmt.Println(msg)
-
-	_, _ = fmt.Fprint(w, msg)
+	w.Header().Set("Content-Type", cType)
+	w.WriteHeader(status)
+	count, err := fmt.Fprint(w, body)
+	if err != nil {
+		fmt.Printf("******************** type '%s' %d, bytes: %d, error: %v\n", cType, status, count, err)
+	}
 }
 
 var ourPrivateClassA = ""
@@ -61,6 +77,9 @@ func main() {
 		}
 	}
 	if err == nil {
+		responses[":11780"] = canned.PortResonses_status() // PORT_7_status___
+		responses[":8080"] = canned.PortResonses_http()    // PORT_0_http_____
+
 		http.HandleFunc("/", handler)
 		err = doAllWork(
 			PORT_0_http_____,
