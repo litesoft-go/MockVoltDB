@@ -16,11 +16,22 @@ import (
 func PortResonses_status() (r *utils.Responder) {
 	r = &utils.Responder{}
 	r.AddPath("/status").
-		Add(`{
+		Add(`
+{
 	"clusterState": "RUNNING",
+	"hostId": 0,
 	"nodeState": "UP",
 	"shutdownPending": false
-}`).
+}
+`).
+		Add(`
+{
+	"clusterState": "RUNNING",
+	"hostId": 0,
+	"nodeState": "UP",
+	"shutdownPending": true
+}
+`).
 		NoMore()
 	return
 }
