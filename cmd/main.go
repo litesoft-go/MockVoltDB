@@ -3,24 +3,25 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/litesoft-go/mockvoltdb/pkg/canned"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"sync"
 
-	"github.com/litesoft-go/mockvoltdb/pkg/canned"
 	"github.com/litesoft-go/mockvoltdb/pkg/utils"
 	"github.com/litesoft-go/mockvoltdb/version"
 )
 
 const PORT_0_http_____ = 8080
 const PORT_1_internal_ = 3021
-const PORT_2_rep______ = 5555
-const PORT_3_zk_______ = 7181
-const PORT_4_jmx______ = 9090
-const PORT_5_admin____ = 21211
-const PORT_6_client___ = 21212
+
+//const PORT_2_rep______ = 5555
+//const PORT_3_zk_______ = 7181
+//const PORT_4_jmx______ = 9090
+//const PORT_5_admin____ = 21211
+//const PORT_6_client___ = 21212
 const PORT_7_status___ = 11780
 
 var responses = make(map[string]*utils.Responder)
@@ -77,22 +78,78 @@ func main() {
 		}
 	}
 	if err == nil {
-		responses[":11780"] = canned.PortResonses_status() // PORT_7_status___
-		responses[":8080"] = canned.PortResonses_http()    // PORT_0_http_____
+		var dir string
+		dir, err = os.Getwd()
+		if err == nil {
+			fmt.Println("Working Dir: ", dir)
+		}
+	}
+	if err == nil {
+		if (len(os.Args) > 1) && (os.Args[1] == "init") {
+			err = createFile("voltdbroot", ".initialized", "")
+			if err == nil {
+				err = createFile("voltdbroot/config", "path.properties", "forGoodTime=555-123-4567\n")
+			}
+			if err == nil {
+				fmt.Println("Initialize! ********************************************")
+				os.Exit(0)
+			}
+			fmt.Println("Initialize! SHIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n", err)
+		} else {
+			responses[":11780"] = canned.PortResonses_status() // PORT_7_status___
+			responses[":8080"] = canned.PortResonses_http()    // PORT_0_http_____
 
-		http.HandleFunc("/", handler)
-		err = doAllWork(
-			PORT_0_http_____,
-			PORT_1_internal_,
-			PORT_2_rep______,
-			PORT_3_zk_______,
-			PORT_4_jmx______,
-			PORT_5_admin____,
-			PORT_6_client___,
-			PORT_7_status___,
-		)
+			http.HandleFunc("/", handler)
+			err = doAllWork(
+				PORT_0_http_____,
+				PORT_1_internal_,
+				//PORT_2_rep______,
+				//PORT_3_zk_______,
+				//PORT_4_jmx______,
+				//PORT_5_admin____,
+				//PORT_6_client___,
+				PORT_7_status___,
+			)
+		}
 	}
 	log.Fatal(err)
+}
+
+func createFile(dirs, filename, body string) (err error) {
+	if dirs != "" {
+		dirs, err = makeDirs(dirs)
+	}
+	if (err == nil) && (filename != "") {
+		err = makeFile(dirs+filename, body)
+	}
+	return
+}
+
+func makeDirs(dirs string) (pathDir string, err error) {
+	_, err = os.Stat(dirs)
+	if os.IsNotExist(err) {
+		err = os.MkdirAll(dirs, 0755) // read & execute: everyone; write: owner
+	}
+	if err == nil {
+		pathDir = dirs + "/"
+	}
+	return
+}
+
+func makeFile(filepath, body string) (err error) {
+	_, err = os.Stat(filepath)
+	if os.IsNotExist(err) {
+		var file *os.File
+		file, err = os.Create(filepath)
+		if err == nil {
+			_, err = file.WriteString(body)
+			err2 := file.Close()
+			if err == nil {
+				err = err2
+			}
+		}
+	}
+	return
 }
 
 func doAllWork(ports ...int) error {

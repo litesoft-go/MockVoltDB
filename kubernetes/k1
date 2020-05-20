@@ -1,0 +1,1 @@
+k exec -it voltdb-1 -- /bin/sh
