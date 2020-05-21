@@ -4,8 +4,8 @@ import (
 	"github.com/litesoft-go/mockvoltdb/pkg/utils"
 )
 
-func PortResonses_http() (r *utils.Responder) {
-	r = &utils.Responder{}
+func PortResonses_http() *utils.Responder {
+	r := &utils.Responder{}
 	r.AddPath(`/api/2.0?admin=true&Procedure=@PrepareShutdown`).
 		Add(`
 {
@@ -94,5 +94,5 @@ func PortResonses_http() (r *utils.Responder) {
 }
 `).
 		NoMore()
-	return
+	return r
 }
